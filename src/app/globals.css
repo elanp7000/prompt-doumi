@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+:root {
+  /* Pastel Palette */
+  --color-primary: #FFB7B2;    /* Soft Pink */
+  --color-secondary: #B5EAD7;  /* Mint Green */
+  --color-accent: #C7CEEA;     /* Baby Blue */
+  --color-background: #FFFDF9; /* Cream/Ivory */
+  --color-surface: #FFFFFF;    /* White for cards */
+  --color-text-main: #4A4A4A;  /* Dark Gray */
+  --color-text-muted: #888888;
+}
+
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
+  --color-background: var(--color-background);
+  --color-surface: var(--color-surface);
+  --color-text-main: var(--color-text-main);
+  --color-text-muted: var(--color-text-muted);
+  
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-main);
+  font-family: Arial, Helvetica, sans-serif;
+}
+

@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="space-y-10 animate-in fade-in duration-500 py-10">
       <div className="text-center space-y-4">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900">어떤 작업을 도와드릴까요?</h1>
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-900">반갑습니다! 어떤 작업을 도와드릴까요?</h1>
         <p className="text-text-muted text-lg">원하시는 주제를 선택하면 맞춤형 가이드가 시작됩니다.</p>
       </div>
 

@@ -8,6 +8,7 @@ export type Topic = {
     color: string; // Tailwind color class for background
     activeColor: string; // Tailwind color class for text/hover (darker shade)
     path: string;
+    disabled?: boolean;
 };
 
 export const TOPICS: Topic[] = [
@@ -40,29 +41,32 @@ export const TOPICS: Topic[] = [
     },
     {
         id: "business",
-        title: "비즈니스",
+        title: "비즈니스 (열심히 공사 중 🚧)",
         description: "사업 기획, 아이디어 브레인스토밍, 보고서 요약",
         icon: Briefcase,
         color: "bg-orange-300",
         activeColor: "group-hover:text-orange-600",
         path: "/builder?mode=business",
+        disabled: true,
     },
     {
         id: "fun",
-        title: "재미/일상",
+        title: "재미/일상 (열심히 공사 중 🚧)",
         description: "오늘 뭐 먹지?, 여행 계획, 타로 점 보기",
         icon: Smile,
         color: "bg-purple-300",
         activeColor: "group-hover:text-purple-600",
         path: "/builder?mode=fun",
+        disabled: true,
     },
     {
         id: "coding",
-        title: "코딩/개발",
+        title: "코딩/개발 (열심히 공사 중 🚧)",
         description: "버그수정, 코드리뷰, 기능구현",
         icon: Code,
         color: "bg-accent", // Blue
         activeColor: "group-hover:text-indigo-600",
         path: "/builder?mode=coding",
+        disabled: true,
     },
 ];

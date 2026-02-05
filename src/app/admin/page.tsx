@@ -9,7 +9,6 @@ export default function AdminPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
-    const [mode, setMode] = useState<"login" | "register">("login");
     const [user, setUser] = useState<any>(null);
     const [newPassword, setNewPassword] = useState("");
 
@@ -33,27 +32,18 @@ export default function AdminPage() {
         setUser(session?.user ?? null);
     };
 
-    const handleAuth = async (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
 
         try {
-            if (mode === "login") {
-                const { error } = await supabase.auth.signInWithPassword({
-                    email,
-                    password,
-                });
-                if (error) throw error;
-                // Login successful, auto-redirect or just show state
-                router.push("/gallery");
-            } else {
-                const { error } = await supabase.auth.signUp({
-                    email,
-                    password,
-                });
-                if (error) throw error;
-                alert("회원가입 확인 메일을 확인해주세요! (또는 자동 로그인 설정을 확인하세요)");
-            }
+            const { error } = await supabase.auth.signInWithPassword({
+                email,
+                password,
+            });
+            if (error) throw error;
+            // Login successful, auto-redirect or just show state
+            router.push("/gallery");
         } catch (error: any) {
             alert(error.message);
         } finally {
@@ -134,11 +124,9 @@ export default function AdminPage() {
                 <Lock className="w-8 h-8 text-gray-500" />
             </div>
 
-            <h1 className="text-2xl font-bold text-gray-900">
-                {mode === "login" ? "관리자 로그인" : "관리자 등록"}
-            </h1>
+            <h1 className="text-2xl font-bold text-gray-900">관리자 로그인</h1>
 
-            <form onSubmit={handleAuth} className="flex flex-col gap-4 w-full max-w-sm">
+            <form onSubmit={handleLogin} className="flex flex-col gap-4 w-full max-w-sm">
                 <input
                     type="email"
                     placeholder="이메일"
@@ -162,16 +150,9 @@ export default function AdminPage() {
                     disabled={loading}
                     className="p-3 bg-gray-900 text-white font-bold rounded-xl hover:bg-gray-800 transition-colors disabled:opacity-50"
                 >
-                    {loading ? "처리 중..." : (mode === "login" ? "로그인" : "등록하기")}
+                    {loading ? "로그인 중..." : "로그인"}
                 </button>
             </form>
-
-            <button
-                onClick={() => setMode(mode === "login" ? "register" : "login")}
-                className="text-sm text-gray-500 hover:text-primary underline"
-            >
-                {mode === "login" ? "새 관리자 계정 만들기" : "이미 계정이 있으신가요? 로그인"}
-            </button>
         </div>
     );
 }

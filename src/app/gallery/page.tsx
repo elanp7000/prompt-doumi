@@ -27,9 +27,12 @@ export default function GalleryPage() {
         const storedId = localStorage.getItem("prompt_doumi_client_id");
         if (storedId) setMyClientId(storedId);
 
-        // Check if I am admin
-        const adminLoggedIn = localStorage.getItem("prompt_doumi_admin");
-        if (adminLoggedIn === "true") setIsAdmin(true);
+        // Check if I am admin (Authenticated via Supabase)
+        const checkAdmin = async () => {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session?.user) setIsAdmin(true);
+        };
+        checkAdmin();
 
         fetchPosts();
     }, []);

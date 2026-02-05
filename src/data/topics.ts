@@ -64,8 +64,8 @@ export const TOPICS: Topic[] = [
         title: "코딩/개발 (열심히 공사 중 🚧)",
         description: "버그수정, 코드리뷰, 기능구현",
         icon: Code,
-        color: "bg-accent", // Blue
-        activeColor: "group-hover:text-indigo-600",
+        color: "bg-blue-500", // Blue
+        activeColor: "group-hover:text-blue-600",
         path: "/builder?mode=coding",
         disabled: true,
     },

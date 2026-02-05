@@ -20,11 +20,16 @@ export default function GalleryPage() {
     const [posts, setPosts] = useState<Post[]>([]);
     const [loading, setLoading] = useState(true);
     const [myClientId, setMyClientId] = useState("");
+    const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
         // Check my identity
         const storedId = localStorage.getItem("prompt_doumi_client_id");
         if (storedId) setMyClientId(storedId);
+
+        // Check if I am admin
+        const adminLoggedIn = localStorage.getItem("prompt_doumi_admin");
+        if (adminLoggedIn === "true") setIsAdmin(true);
 
         fetchPosts();
     }, []);
@@ -48,7 +53,7 @@ export default function GalleryPage() {
     const handleDelete = async (post: Post) => {
         if (!confirm("정말 삭제하시겠습니까?")) return;
 
-        if (post.client_id !== myClientId) {
+        if (post.client_id !== myClientId && !isAdmin) {
             alert("본인이 작성한 글만 삭제할 수 있습니다.\n(다른 브라우저나 기기에서 작성한 경우 삭제가 불가능할 수 있습니다)");
             return;
         }
@@ -73,6 +78,7 @@ export default function GalleryPage() {
     const isOwner = (post: Post) => {
         // If post has no client_id (old posts), nobody can delete easily (or allow all? safer to disallow)
         // Current logic: strict match
+        if (isAdmin) return true;
         return post.client_id && post.client_id === myClientId;
     };
 

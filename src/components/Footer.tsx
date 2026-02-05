@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
     return (
         <footer className="bg-white border-t border-gray-100 py-8 mt-auto">
@@ -9,6 +11,7 @@ export default function Footer() {
                     <a href="#" className="hover:text-primary transition-colors">이용약관</a>
                     <a href="#" className="hover:text-primary transition-colors">개인정보처리방침</a>
                     <a href="#" className="hover:text-primary transition-colors">문의하기</a>
+                    <Link href="/admin" className="hover:text-primary transition-colors opacity-50 hover:opacity-100">관리자</Link>
                 </div>
             </div>
         </footer>

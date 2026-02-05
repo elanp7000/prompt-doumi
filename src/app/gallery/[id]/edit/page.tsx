@@ -17,20 +17,24 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
     const [myClientId, setMyClientId] = useState("");
 
     useEffect(() => {
-        params.then(p => {
+        const checkPermission = async () => {
+            const p = await params;
             setPostId(p.id);
+
+            // 1. Check Admin (Supabase Auth)
+            const { data: { session } } = await supabase.auth.getSession();
+            const isAdmin = !!session?.user;
+
+            // 2. Check Owner (Local Storage)
             const storedId = localStorage.getItem("prompt_doumi_client_id");
-            if (storedId) {
-                setMyClientId(storedId);
-                fetchPost(p.id, storedId);
-            } else {
-                alert("수정 권한이 없습니다.");
-                router.push("/gallery");
-            }
-        });
+            if (storedId) setMyClientId(storedId);
+
+            fetchPost(p.id, storedId, isAdmin);
+        };
+        checkPermission();
     }, [params]);
 
-    const fetchPost = async (id: string, clientId: string) => {
+    const fetchPost = async (id: string, clientId: string | null, isAdmin: boolean) => {
         try {
             const { data, error } = await supabase
                 .from('gallery_posts')
@@ -40,8 +44,10 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
 
             if (error) throw error;
 
-            if (data.client_id !== clientId) {
-                alert("본인이 작성한 글만 수정할 수 있습니다.");
+            // Permission Check: Owner OR Admin
+            const isOwner = data.client_id && data.client_id === clientId;
+            if (!isOwner && !isAdmin) {
+                alert("수정 권한이 없습니다.");
                 router.push(`/gallery/${id}`);
                 return;
             }

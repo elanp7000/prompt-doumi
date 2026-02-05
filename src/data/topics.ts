@@ -30,13 +30,13 @@ export const TOPICS: Topic[] = [
         path: "/builder?mode=writing",
     },
     {
-        id: "coding",
-        title: "코딩/개발",
-        description: "버그수정, 코드리뷰, 기능구현",
-        icon: Code,
-        color: "bg-accent", // Blue
-        activeColor: "group-hover:text-indigo-600",
-        path: "/builder?mode=coding",
+        id: "custom",
+        title: "자유 제작",
+        description: "원하는 모든 주제에 대해 자유롭게 만들기",
+        icon: Lightbulb,
+        color: "bg-gray-400",
+        activeColor: "group-hover:text-gray-700",
+        path: "/builder?mode=custom",
     },
     {
         id: "business",
@@ -57,12 +57,12 @@ export const TOPICS: Topic[] = [
         path: "/builder?mode=fun",
     },
     {
-        id: "custom",
-        title: "자유 제작",
-        description: "원하는 모든 주제에 대해 자유롭게 만들기",
-        icon: Lightbulb,
-        color: "bg-gray-400",
-        activeColor: "group-hover:text-gray-700",
-        path: "/builder?mode=custom",
+        id: "coding",
+        title: "코딩/개발",
+        description: "버그수정, 코드리뷰, 기능구현",
+        icon: Code,
+        color: "bg-accent", // Blue
+        activeColor: "group-hover:text-indigo-600",
+        path: "/builder?mode=coding",
     },
 ];
